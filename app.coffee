@@ -5,6 +5,7 @@ js_pipeline  = require 'js-pipeline'
 css_pipeline = require 'css-pipeline'
 records      = require 'roots-records'
 collections  = require 'roots-collections'
+dynamic_content = require 'dynamic-content'
 excerpt      = require 'html-excerpt'
 moment       = require 'moment'
 
@@ -21,13 +22,15 @@ module.exports =
 
 
   extensions: [
+    dynamic_content(),
     records(
       slider: { file: "data/slider.json" }
       slidertext: { file: "data/slidertext.json" }
       clients: { file: "data/clients.json" }
     ),
     collections(folder: 'news', layout: 'post'),
-    collections(folder: 'pages', layout: 'page'),
+    collections(folder: 'posts', layout: 'post'),
+    collections(folder: 'services', layout: 'page'),
     js_pipeline(files: 'assets/js/*.coffee'),
     css_pipeline(files: 'assets/css/*.styl')
   ]
